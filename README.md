@@ -1,8 +1,6 @@
-# Welcome to your CDK TypeScript project
+# private-aws-account-bootstrap-template
 
-This is a blank project for CDK development with TypeScript.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Example AWS CDK TypeScript code (IaC) for bootstrapping a personal AWS account (non-corporate setup, single account).
 
 ## Useful commands
 
