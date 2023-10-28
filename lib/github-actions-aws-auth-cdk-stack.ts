@@ -21,22 +21,19 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
 
     const conditions: iam.Conditions = {
       StringLike: {
-        [`${githubDomain}:sub`]: iamRepoDeployAccess,
+        'token.actions.githubusercontent.com:sub': iamRepoDeployAccess,
       },
-      ForAllValuesStringEquals: {
-        'token.actions.githubusercontent.com:iss': 'https://token.actions.githubusercontent.com',
+      StringEquals: {
         'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
       },
     }
-
-    // {// iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')}
 
     const role = new iam.Role(this, 'gitHubDeployRole', {
       assumedBy: new iam.WebIdentityPrincipal(githubProvider.openIdConnectProviderArn, conditions),
       managedPolicies: [],
       roleName: 'githubActionsDeployRole',
       description: 'This role is used via GitHub Actions to deploy on the target AWS account',
-      maxSessionDuration: cdk.Duration.hours(12),
+      maxSessionDuration: cdk.Duration.hours(1),
     })
 
     new cdk.CfnOutput(this, 'GithubActionOidcIamRoleArn', {
