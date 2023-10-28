@@ -2,6 +2,8 @@
 
 Example AWS CDK TypeScript code (IaC) for bootstrapping a personal AWS account (non-corporate setup, single account).
 
+Copy `cdk.context.template.json` to `cdk.context.json` and configure the values to your env.
+
 ## Useful commands
 
 * `npm run build`   compile typescript to js
