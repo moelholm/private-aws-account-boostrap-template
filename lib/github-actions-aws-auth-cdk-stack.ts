@@ -25,6 +25,7 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
       },
       StringEquals: {
         'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
+        'token.actions.githubusercontent.com:iss': 'https://token.actions.githubusercontent.com',
       },
     }
 
