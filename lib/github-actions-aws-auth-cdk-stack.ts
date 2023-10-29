@@ -12,7 +12,7 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
 
     const githubDomain = 'https://token.actions.githubusercontent.com'
 
-    const githubProvider = new iam.OpenIdConnectProvider(this, 'GithubActionsProvider', {
+    const githubProvider = new iam.OpenIdConnectProvider(this, 'GithubActionsOidcProvider', {
       url: githubDomain,
       clientIds: ['sts.amazonaws.com'],
     })
@@ -29,7 +29,7 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
       },
     }
 
-    const role = new iam.Role(this, 'gitHubDeployRole', {
+    const role = new iam.Role(this, 'GitHubDeployRole', {
       assumedBy: new iam.WebIdentityPrincipal(githubProvider.openIdConnectProviderArn, conditions),
       managedPolicies: [],
       roleName: 'GithubActionsDeployRole',
@@ -37,10 +37,10 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
       maxSessionDuration: cdk.Duration.hours(1),
     })
 
-    new cdk.CfnOutput(this, 'GithubActionOidcIamRoleArn', {
+    new cdk.CfnOutput(this, 'GithubActionsDeployRoleArn', {
       value: role.roleArn,
-      description: `Arn for AWS IAM role with Github oidc auth for ${iamRepoDeployAccess}`,
-      exportName: 'GithubActionOidcIamRoleArn',
+      description: `Arn for the AWS IAM Role used by GitHub Actions to deploy`,
+      exportName: 'GithubActionsDeployRoleArn',
     })
 
     cdk.Tags.of(this).add('component', 'CdkGithubActionsOidcIamRole')
