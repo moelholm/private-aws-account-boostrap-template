@@ -32,8 +32,8 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
     const role = new iam.Role(this, 'gitHubDeployRole', {
       assumedBy: new iam.WebIdentityPrincipal(githubProvider.openIdConnectProviderArn, conditions),
       managedPolicies: [],
-      roleName: 'githubActionsDeployRole',
-      description: 'This role is used via GitHub Actions to deploy on the target AWS account',
+      roleName: 'GithubActionsDeployRole',
+      description: 'Used from GitHub Actions to deploy',
       maxSessionDuration: cdk.Duration.hours(1),
     })
 
