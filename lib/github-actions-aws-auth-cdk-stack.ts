@@ -24,8 +24,7 @@ export class GithubActionsAwsAuthCdkStack extends cdk.Stack {
         'token.actions.githubusercontent.com:sub': iamRepoDeployAccess,
       },
       StringEquals: {
-        'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-        'token.actions.githubusercontent.com:iss': 'https://token.actions.githubusercontent.com',
+        'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com'
       },
     }
 
